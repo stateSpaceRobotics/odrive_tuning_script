@@ -19,6 +19,7 @@ def yesnoquery(message):
     """
     Displays `message` and waits for user Y/N input.
     Returns Boolean where true means Y.
+    Nick's branch
     """
     pass #code here
     return None
