@@ -50,7 +50,7 @@ def initialize(odrv, axis):
     pass #code here
     return None
 
-def test(odrv, axis):
+def test(odrv, axis):  #Andrew Byers is trying to work on it :)
     """
     Runs a test function through the ODrive.
     50% duty cycle square wave with a 2-second period and 0,2*pi radian amplitude.
