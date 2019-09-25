@@ -54,6 +54,7 @@ def update_vel_gain(odrv, axis, pct=1, bias=0):
     """
     Updates vel_gain by multiplying by pct and adding bias.
     """
+    #Isaac's Function
     pass #code here
     return None
 
