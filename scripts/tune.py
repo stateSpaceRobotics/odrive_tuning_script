@@ -19,10 +19,26 @@ def yesnoquery(message):
     """
     Displays `message` and waits for user Y/N input.
     Returns Boolean where true means Y.
-    Nick's branch
     """
-    pass #code here
-    return None
+    useryn = None
+
+    while useryn is None:
+
+        if not isinstance(message, str):
+            raise ValueError("Must pass a valid string to query")
+                
+        useryn = input(message).lower()
+            
+        if useryn != "y" and useryn != "n":
+            print("Must enter either a 'Y' or 'N'", useryn)
+            useryn = None
+
+    if useryn == "y":
+        return True
+    elif useryn == "n":
+        return False
+    else:
+        return -1
 
 def initialize(odrv, axis):
     """
