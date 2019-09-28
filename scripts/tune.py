@@ -80,6 +80,7 @@ def change_all_gains(odrv, axis, pct=0.5):
     """
     Change all odrive gains by pct factor.
     """
+    # this where stuff goes
     pass #code here
     return None
 
