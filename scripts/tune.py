@@ -46,9 +46,14 @@ def test(odrv, axis):
 def change_all_gains(odrv, axis, pct=0.5):
     """
     Change all odrive gains by pct factor.
+    Mia lives here
     """
-    # this where stuff goes
-    pass #code here
+    axis_config = axis.controller.config # shorten that
+
+    axis_config.pos_gain = axis_config.pos_gain * pct
+    axis_config.vel_gain = axis_config.vel_gain * pct
+    axis_config.vel_integrator_gain = axis_config.vel_integrator_gain * pct
+
     return None
 
 def update_vel_gain(odrv, axis, pct=1, bias=0):
