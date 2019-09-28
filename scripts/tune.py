@@ -14,7 +14,16 @@ def startup():
     Also prompts user to select which axis to tune. Returns it too.         Logan Daniel lmd328
     """
     pass #code here
-    return None, None
+        drive0 = odrive.find_any()    #Starts odrive
+
+        selected_axis = int(input("Select Axis 1/2: "))     #User prompt to select axis 1 or 2
+        
+        if selected_axis == 1:      #Based on user input, selects axis 1 or 2
+            axis = return drive0.axis0
+        elif selected_axis == 2:
+            axis = return drive0.axis1
+
+    return drive0, axis
 
 def yesnoquery(message):
     """
