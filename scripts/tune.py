@@ -13,15 +13,16 @@ def startup():
     Connects to the ODrive and returns the odrv object.
     Also prompts user to select which axis to tune. Returns it too.         Logan Daniel lmd328
     """
-    pass #code here
-        drive0 = odrive.find_any()    #Starts odrive
-
-        selected_axis = int(input("Select Axis 1/2: "))     #User prompt to select axis 1 or 2
+    pass
         
-        if selected_axis == 1:      #Based on user input, selects axis 1 or 2
-            axis = return drive0.axis0
-        elif selected_axis == 2:
-            axis = return drive0.axis1
+    drive0 = odrive.find_any()    #Starts odrive
+    
+    selected_axis = int(input("Select Axis 0/1: "))     #User prompt to select axis 0 or 1
+    
+    if selected_axis == 0:      #Based on user input, selects axis 0 or 1
+        axis = drive0.axis0
+    elif selected_axis == 1:
+        axis = drive0.axis1
 
     return drive0, axis
 
