@@ -10,7 +10,7 @@ from odrive.utils import start_liveplotter
 def startup():
     """
     Connects to the ODrive and returns the odrv object.
-    Also prompts user to select which axis to tune. Returns it too.
+    Also prompts user to select which axis to tune. Returns it too.         Logan Daniel lmd328
     """
     pass #code here
     return None, None
