@@ -56,6 +56,8 @@ def update_vel_gain(odrv, axis, pct=1, bias=0):
     """
     #Isaac's Function
     pass #code here
+    odrv.axis.controller.config.vel_gain *= pct
+    odrv.axis.controller.config.vel_gain += bias
     return None
 
 def update_pos_gain(odrv, axis, pct=1, bias=0):
