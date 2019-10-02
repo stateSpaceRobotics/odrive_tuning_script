@@ -6,6 +6,7 @@ https://docs.odriverobotics.com/control
 import odrive
 from odrive.enums import *
 from odrive.utils import start_liveplotter
+import time
 
 def startup():
     """
@@ -57,7 +58,12 @@ def test(odrv, axis):  #Andrew Byers is trying to work on it :)
     Runs for 30 seconds.
     NOTE: must convert from radians to encoder counts!
     """
-    pass #code here
+    for i in range 15:
+        axis.controller.pos_setpoint = axis.encoder.config.cpr 
+        time.sleep(1)
+        axis.controller.pos_setpoint = 0
+        time.sleep(1)
+
     return None
 
 def change_all_gains(odrv, axis, pct=0.5):
