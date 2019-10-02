@@ -94,6 +94,7 @@ def print_gains(odrv, axis):
 def manual_tweaks(odrv, axis):
     """
     Interactive prompt to change the three gains.
+    mia also lives here
     """
     pass #code here
     return None
