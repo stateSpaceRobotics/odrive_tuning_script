@@ -58,6 +58,27 @@ def initialize(odrv, axis):
     Sets to closed loop position control mode.
     Also launches the liveplotter.
     """
+
+     axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
+
+    while (odrv.axis.current_state != AXIS_STATE_IDLE):
+        time.sleep(0.1)
+
+    axis.controller.config.vel_gain = 0
+    axis.controller.config.vel_integrator_gain = 0
+    axis.controller.config.pos_gain = 0
+
+    axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
+
+    axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
+
+    start_liveplotter(lambda: 
+    [ axis.encoder.pos_estimate,
+    axis.controller.pos_setpoint
+    ])
+
+
+
     pass #code here
     return None
 
