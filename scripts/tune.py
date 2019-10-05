@@ -71,7 +71,7 @@ def update_vel_integrator_gain(odrv, axis, pct=1, bias=0):
     pass #code here
     return None
 
-def set_vel_integrator_gain(odrv, axis):
+def set_vel_integrator_gain(odrv, axis): #Logan and Andrew got this
     """
     Sets vel_integrator_gain based on following equation:
     vel_integrator_gain = 0.5*B*vel_gain
