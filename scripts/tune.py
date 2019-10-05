@@ -52,6 +52,7 @@ def yesnoquery(message):
         return -1
 
 def initialize(odrv, axis):
+    #Jonathan Windham
     """
     Calibrate ODrive.
     Reset ODrive gains to initial values. Namely, set vel_integrator_gain to 0.
