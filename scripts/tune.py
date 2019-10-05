@@ -85,7 +85,9 @@ def update_vel_integrator_gain(odrv, axis, pct=1, bias=0): #Andrew Byers is doin
     """
     Updates vel_integrator_gain by multiplying by pct and adding bias.
     """
-    pass #code here
+
+     odrv.axis.controller.config.vel_integrator_gain = odrv.axis.controller.config.vel_integrator_gain * pct + bias
+    
     return None
 
 def set_vel_integrator_gain(odrv, axis):
