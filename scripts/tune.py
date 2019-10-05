@@ -81,7 +81,7 @@ def update_pos_gain(odrv, axis, pct=1, bias=0):
     pass #code here
     return None
 
-def update_vel_integrator_gain(odrv, axis, pct=1, bias=0):
+def update_vel_integrator_gain(odrv, axis, pct=1, bias=0): #Andrew Byers is doing this
     """
     Updates vel_integrator_gain by multiplying by pct and adding bias.
     """
