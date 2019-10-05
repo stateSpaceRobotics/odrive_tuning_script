@@ -111,7 +111,7 @@ def change_all_gains(odrv, axis, pct=0.5):
 
     return None
 
-def update_vel_gain(odrv, axis, pct=1, bias=0):
+def update_vel_gain(odrv, axis, pct=1, bias=0): #andrew Byers
     """
     Updates vel_gain by multiplying by pct and adding bias.
     """
