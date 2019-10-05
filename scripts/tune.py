@@ -113,7 +113,7 @@ def update_vel_integrator_gain(odrv, axis, pct=1, bias=0): #Andrew Byers is doin
     
     return None
 
-def set_vel_integrator_gain(odrv, axis):
+def set_vel_integrator_gain(odrv, axis): #Logan and Andrew got this
     """
     Sets vel_integrator_gain based on following equation:
     vel_integrator_gain = 0.5*B*vel_gain
@@ -123,7 +123,22 @@ def set_vel_integrator_gain(odrv, axis):
     Must query the user for system settle time.
     Non-numeric/empty responses should rerun the test function.
     """
-    pass #code here
+
+    while(True):
+
+        test(odrv, axis)
+        try:
+            t_settle = float(input("Enter system settle time: ")) 
+        except:
+            print("Nothing entered/invalid character")
+        else:
+            B = 1/t_settle
+            odrv.axis.controller.config.vel_integrator_gain = 0.5 * B * odrv.axis.controller.config.vel_gain
+            break
+
+    
+    
+
     return None
 
 def print_gains(odrv, axis):
