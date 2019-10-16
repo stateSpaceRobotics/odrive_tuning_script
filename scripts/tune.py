@@ -168,8 +168,11 @@ def print_gains(odrv, axis):
     """
     Prints gains. Also returns them.
     """
-    pass #code here
-    return None,None,None
+    axis_config = axis.controller.config  # shorten that
+    print("Position:", axis_config.pos_gain )
+    print("Velocity:", axis_config.vel_gain)
+    print("Velocity Integrator:", axis_config.vel_integrator_gain)
+    return axis_config.pos_gain, axis_config.vel_gain, axis_config.vel_integrator_gain
 
 def manual_tweaks(odrv, axis):
     """
