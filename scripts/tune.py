@@ -98,11 +98,11 @@ def manual_tweaks(odrv, axis):
     """
     axis_config = axis.controller.config  # shorten that
 
-    while True: # is there a better way to do this? yes.
+    while True:  # is there a better way to do this? yes.
         print("1: position 2: velocity 3: velocity integrator")
         while True:
             mod_gain = input("Pick which gain to modify: ")
-            if (mod_gain != 1 and mod_gain != 2 and mod_gain != 3):
+            if mod_gain != 1 and mod_gain != 2 and mod_gain != 3:
                 print("Invalid input")
             else:
                 break
@@ -113,13 +113,10 @@ def manual_tweaks(odrv, axis):
         else:
             gain = "velocity integrator"
         print("Modifying", gain, "gain")
-        while True:
-            ans = input("Continue? y/n ")
-            if (ans != "y" and ans != "n"):
-                print("Invalid input")
-            else:
-                break
-        if ans == "y":
+
+        ans = yesnoquery("Continue? (Y/N)")
+
+        if ans:
             break
         else:
             continue
@@ -132,18 +129,16 @@ def manual_tweaks(odrv, axis):
         new_gain = axis_config.pos_gain
     elif mod_gain == 2:
         old_gain = axis_config.vel_gain
-        axis_config.vel_gain = axis_config.vel_gain * pct
+        axis_config.vel_gain = axis_config.vel_gain * pct + bias
         new_gain = axis_config.vel_gain
     else:
         old_gain = axis_config.vel_integrator_gain
-        axis_config.vel_integrator_gain = axis_config.vel_integrator_gain * pct
+        axis_config.vel_integrator_gain = axis_config.vel_integrator_gain * pct + bias
         new_gain = axis_config.vel_integrator_gain
 
     print("Old gain: ", old_gain, "New gain: ", new_gain)
-
-
-
     return None
+
 
 if __name__ == "__main__":
     odrv, axis = startup()
