@@ -101,14 +101,14 @@ def manual_tweaks(odrv, axis):
     while True:  # is there a better way to do this? yes.
         print("1: position 2: velocity 3: velocity integrator")
         while True:
-            mod_gain = input("Pick which gain to modify: ")
-            if mod_gain != 1 and mod_gain != 2 and mod_gain != 3:
+            mod_gain = str(input("Pick which gain to modify: "))
+            if mod_gain != str("1") and mod_gain != str("2") and mod_gain != str("3"):
                 print("Invalid input")
             else:
                 break
-        if mod_gain == 1:
+        if mod_gain == str("1"):
             gain = "position"
-        elif mod_gain == 2:
+        elif mod_gain == str("2"):
             gain = "velocity"
         else:
             gain = "velocity integrator"
@@ -123,11 +123,11 @@ def manual_tweaks(odrv, axis):
     pct = input("Input pct factor")
     bias = input("Input bias")
 
-    if mod_gain == 1:
+    if mod_gain == str("1"):
         old_gain = axis_config.pos_gain
         axis_config.pos_gain = axis_config.pos_gain * pct + bias
         new_gain = axis_config.pos_gain
-    elif mod_gain == 2:
+    elif mod_gain == str("2"):
         old_gain = axis_config.vel_gain
         axis_config.vel_gain = axis_config.vel_gain * pct + bias
         new_gain = axis_config.vel_gain
