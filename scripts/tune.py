@@ -60,9 +60,9 @@ def initialize(odrv, axis):
     Also launches the liveplotter.
     """
 
-     axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
+    axis.requested_state = AXIS_STATE_FULL_CALIBRATION_SEQUENCE
 
-    while (odrv.axis.current_state != AXIS_STATE_IDLE):
+    while (axis.current_state != AXIS_STATE_IDLE):
         time.sleep(0.1)
 
     axis.controller.config.vel_gain = 0
@@ -90,7 +90,7 @@ def test(odrv, axis):  #Andrew Byers is trying to work on it :)
     Runs for 30 seconds.
     NOTE: must convert from radians to encoder counts!
     """
-    for i in range 15:
+    for i in range(15):
         axis.controller.pos_setpoint = axis.encoder.config.cpr 
         time.sleep(1)
         axis.controller.pos_setpoint = 0
@@ -135,7 +135,7 @@ def update_vel_integrator_gain(odrv, axis, pct=1, bias=0): #Andrew Byers is doin
     Updates vel_integrator_gain by multiplying by pct and adding bias.
     """
 
-     odrv.axis.controller.config.vel_integrator_gain = odrv.axis.controller.config.vel_integrator_gain * pct + bias
+    odrv.axis.controller.config.vel_integrator_gain = odrv.axis.controller.config.vel_integrator_gain * pct + bias
     
     return None
 
