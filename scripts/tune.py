@@ -65,13 +65,15 @@ def initialize(odrv, axis):
     while (axis.current_state != AXIS_STATE_IDLE):
         time.sleep(0.1)
 
-    axis.controller.config.vel_gain = 0
+    axis.controller.config.vel_gain = 10.0/10000.0 #5.0/10000.0
     axis.controller.config.vel_integrator_gain = 0
-    axis.controller.config.pos_gain = 0
+    axis.controller.config.pos_gain = 20
 
     axis.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL
 
     axis.controller.config.control_mode = CTRL_MODE_POSITION_CONTROL
+
+    axis.controller.config.vel_limit = 8192.0 * 10
 
     start_liveplotter(lambda: 
     [ axis.encoder.pos_estimate,
@@ -90,7 +92,7 @@ def test(odrv, axis):  #Andrew Byers is trying to work on it :)
     Runs for 30 seconds.
     NOTE: must convert from radians to encoder counts!
     """
-    for i in range(15):
+    for i in range(3):
         axis.controller.pos_setpoint = axis.encoder.config.cpr 
         time.sleep(1)
         axis.controller.pos_setpoint = 0
@@ -118,8 +120,8 @@ def update_vel_gain(odrv, axis, pct=1, bias=0): #andrew Byers
 
     #Isaac's Function
     pass #code here
-    odrv.axis.controller.config.vel_gain *= pct
-    odrv.axis.controller.config.vel_gain += bias
+    axis.controller.config.vel_gain *= pct
+    axis.controller.config.vel_gain += bias
     return None
 
 def update_pos_gain(odrv, axis, pct=1, bias=0):
@@ -127,7 +129,7 @@ def update_pos_gain(odrv, axis, pct=1, bias=0):
     Updates pos_gain by multiplying by pct and adding bias.   Logan Daniel lmd328
     """
     pass #code here
-    odrv.axis.controller.config.pos_gain = odrv.axis.controller.config.pos_gain * pct + bias
+    axis.controller.config.pos_gain = axis.controller.config.pos_gain * pct + bias
     return None
 
 def update_vel_integrator_gain(odrv, axis, pct=1, bias=0): #Andrew Byers is doing this
@@ -135,7 +137,7 @@ def update_vel_integrator_gain(odrv, axis, pct=1, bias=0): #Andrew Byers is doin
     Updates vel_integrator_gain by multiplying by pct and adding bias.
     """
 
-    odrv.axis.controller.config.vel_integrator_gain = odrv.axis.controller.config.vel_integrator_gain * pct + bias
+    axis.controller.config.vel_integrator_gain = axis.controller.config.vel_integrator_gain * pct + bias
     
     return None
 
@@ -159,7 +161,7 @@ def set_vel_integrator_gain(odrv, axis): #Logan and Andrew got this
             print("Nothing entered/invalid character")
         else:
             B = 1/t_settle
-            odrv.axis.controller.config.vel_integrator_gain = 0.5 * B * odrv.axis.controller.config.vel_gain
+            axis.controller.config.vel_integrator_gain = 0.5 * B * axis.controller.config.vel_gain
             break
 
     
@@ -244,9 +246,10 @@ if __name__ == "__main__":
     while yesnoquery("Still Overshoot? (Y/N): "):
         update_pos_gain(odrv, axis, pct=0.95, bias=0)
         test(odrv, axis)
-    set_vel_integrator_gain(odrv, axis)
-    print_gains(odrv, axis)
-    test(odrv, axis)
+    while not yesnoquery("Settle Time set? (Y/N): "):
+        set_vel_integrator_gain(odrv, axis)
+        print_gains(odrv, axis)
+        test(odrv, axis)
     while yesnoquery("Manual Tweaking? (Y/N): "):
         manual_tweaks(odrv, axis)
         test(odrv,axis)
